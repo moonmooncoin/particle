@@ -1139,6 +1139,49 @@ int64 static GetBlockValue(int nHeight, int64 nFees, unsigned int nBits)
 	nSubsidy = 100000 * COIN;
      }
 
+     // *** Update subsidy calculation after block 60,000
+     // On this schedule, it will take 9.67 years for mining to complete
+     if(nHeight <= 65000 && nHeight > 60000)
+     {
+	nSubsidy = 780 * COIN;
+     }
+     else if(nHeight <= 75000 && nHeight > 65000)
+     {
+	nSubsidy = 360 * COIN;
+     }
+     else if(nHeight <= 125000 && nHeight > 75000)
+     {
+	nSubsidy = 180 * COIN;
+     }
+     else if(nHeight <= 225000 && nHeight > 125000)
+     {
+	nSubsidy = 90 * COIN;
+     }
+     else if(nHeight <= 725000 && nHeight > 225000)
+     {
+	nSubsidy = 45 * COIN;
+     }
+     else if(nHeight <= 1725000 && nHeight > 725000)
+     {
+	nSubsidy = 22 * COIN;
+     }
+     else if(nHeight > 1725000)
+     {
+	nSubsidy = 12 * COIN;
+     }
+
+     // * 10,000 reward every 1,000 blocks until block 125000
+     if(nHeight > 60000 && nHeight % 1000 == 0)
+     {
+	nSubsidy = 10000 * COIN;
+     }
+
+     // * 1,000 reward every 1,000 blocks after block 125000
+     if(nHeight > 125000 && nHeight % 1000 == 0)
+     {
+	nSubsidy = 1000 * COIN;
+     }
+
 
     return nSubsidy + nFees;
 }
