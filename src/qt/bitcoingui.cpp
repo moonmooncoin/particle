@@ -142,6 +142,8 @@ BitcoinGUI::BitcoinGUI(QWidget *parent) :
     rpcConsole = new RPCConsole(this);
     connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole, SLOT(show()));
 
+    walletFrame->setStyleSheet("background-color: #eeeeee;");// border-top: 12px solid #2DB6E0;");
+
     // Install event filter to be able to catch status tip events (QEvent::StatusTip)
     this->installEventFilter(this);
 }
